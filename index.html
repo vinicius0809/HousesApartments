@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Exercício 3 - JS & jQuery</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+
+<body>
+    <div id="image" class="container-fluid bg-light">
+        <img src="img/ApHouse.PNG" alt="Casas e Apartamentos" class="col-xs-8 col-xs-offset-2" />
+        <div class="form-group  col-xs-6 col-xs-offset-3">
+           <label for="dpdType">Tipo de Imóvel</label>
+            <select name="dpdType" id="dpdType" class="form-control">
+                <option value="select" disabled selected>Selecione um tipo de imóvel</option>
+                <option value="house">Casa</option>
+                <option value="apartment">Apartamento</option>
+            </select>
+        </div>
+    </div>
+
+    <div id="house" class="container-fluid col-xs-12 bg-light" hidden>
+        <div id="house-info" hidden>
+            <h2>Informações das Casas</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Endereço</th>
+                        <th scope="col">Número</th>
+                        <th scope="col">Complemento</th>
+                        <th scope="col">Telefone</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+        <form id="house-form" onsubmit="SaveHouse(); return false;" class="col-xs-12">
+            <div class="form-group col-xs-6 ">
+                <div class="input-group col-xs-12">
+                    <label for="houseAddress">Endereço</label>
+                    <input id="houseAddress" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group col-xs-6">
+                <div class="input-group col-xs-12">
+                    <label for="houseNumber">Número</label>
+                    <input id="houseNumber" class="form-control" type="number" min="0">
+                </div>
+            </div>
+            <div class="form-group col-xs-6">
+                <div class="input-group col-xs-12">
+                    <label for="houseComplement">Complemento</label>
+                    <input id="houseComplement" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group col-xs-6">
+                <div class="input-group col-xs-12">
+                    <label for="housePhone">Telefone</label>
+                    <input id="housePhone" class="form-control phone" type="text" required>
+                </div>
+            </div>
+            <div class="form-group col-xs-12">
+                <input type="submit" class="btn btn-success" value="Salvar" id="btnSubmitHouse" data-index-position="-1">
+            </div>
+        </form>
+    </div>
+    <div id="apartment" class="container-fluid col-xs-12 bg-light" hidden>
+        <div id="apartment-info" hidden class="col-xs-12">
+            <h2>Informações dos Apartamentos</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Endereço</th>
+                        <th scope="col">Número</th>
+                        <th scope="col">Complemento</th>
+                        <th scope="col">Telefone</th>
+                        <th scope="col">Garagem</th>
+                        <th scope="col">Data Compra</th>
+                        <th scope="col">Valor</th>
+                        <th scope="col">Piscina</th>
+                        <th scope="col">Quadra</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+        <form id="apartment-form" onsubmit="SaveApartment(); return false;" class="col-xs-12">
+            <div class="form-group col-xs-6">
+                <div class="input-group col-xs-12">
+                    <label for="apartmentAddress">Endereço</label>
+                    <input id="apartmentAddress" class="form-control" type="text" required>
+                </div>
+            </div>
+            <div class="form-group col-xs-6">
+                <div class="input-group col-xs-12">
+                    <label for="apartmentNumber">Número</label>
+                    <input id="apartmentNumber" class="form-control" type="number" min="0">
+                </div>
+            </div>
+            <div class="form-group col-xs-6">
+                <div class="input-group col-xs-12">
+                    <label for="apartmentComplement">Complemento</label>
+                    <input id="apartmentComplement" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group col-xs-6">
+                <div class="input-group col-xs-12">
+                    <label for="apartmentPhone">Telefone</label>
+                    <input id="apartmentPhone" class="form-control phone" type="text" required>
+                </div>
+            </div>
+            <div class="form-group col-xs-6">
+                <div class="input-group col-xs-12">
+                    <label class="col-xs-6" for="apartmentGarage">Vaga de Garagem: </label>
+                    <div class="col-xs-6" id="apartmentGarage">
+                        <label class="radio-inline"><input type="radio" name="apartmentGarage" checked value="Sim">Sim</label>
+                        <label class="radio-inline"><input type="radio" name="apartmentGarage" value="Não">Não</label>
+                    </div>
+                </div>
+                <div class="input-group col-xs-12">
+                    <label class="col-xs-6" for="apartmentPool">Piscina:</label>
+                    <div class="col-xs-6" id="apartmentPool">
+                        <label class="radio-inline"><input type="radio" name="apartmentPool" checked value="Sim">Sim</label>
+                        <label class="radio-inline"><input type="radio" name="apartmentPool" value="Não">Não</label>
+                    </div>
+                </div>
+                <div class="input-group col-xs-12">
+                    <label class="col-xs-6" for="apartmentCourt">Quadra:</label>
+                    <div class="col-xs-6" id="apartmentCourt">
+                        <label class="radio-inline"><input type="radio" name="apartmentCourt" checked value="Sim">Sim</label>
+                        <label class="radio-inline"><input type="radio" name="apartmentCourt" value="Não">Não</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-xs-3">
+                <div class="input-group">
+                    <label for="apartmentDate">Data da Compra</label>
+                    <input id="apartmentDate" class="form-control" type="date" required>
+                </div>
+            </div>
+            <div class="form-group col-xs-3">
+                <div class="input-group">
+                    <label for="apartmentPrice">Valor (R$)</label>
+                    <input id="apartmentPrice" class="form-control money" type="text" required>
+                </div>
+            </div>
+                <div class="form-group col-xs-12">
+                    <input type="submit" class="btn btn-success" value="Salvar" id="btnSubmitApartment" data-index-position="-1">
+                </div>
+        </form>
+    </div>
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="https://igorescobar.github.io/jQuery-Mask-Plugin/js/jquery.mask.min.js"></script>
+    <script src="Script1.js"></script>
+</body>
+
+</html>
